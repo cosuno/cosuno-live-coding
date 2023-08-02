@@ -1,19 +1,20 @@
 import express from 'express';
 import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
 
 const app = express();
 const port = 9001;
 
-app.get('/', (_req, res) => {
-  const database = new sqlite3.Database('database.db', sqlite3.OPEN_READONLY);
-
-  database.get('SELECT 1 FROM Subcontractors', (error, row) => {
-    if (error) {
-      throw error;
-    }
-
-    res.send(row);
+app.get('/', async (_req, res) => {
+  const database = await open({
+    filename: 'database.db',
+    driver: sqlite3.Database,
+    mode: sqlite3.OPEN_READONLY,
   });
+
+  const rows = await database.all('SELECT 1 FROM Subcontractors');
+
+  res.send(rows);
 });
 
 app.listen(port, () => {
