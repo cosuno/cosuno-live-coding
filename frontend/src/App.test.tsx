@@ -89,7 +89,7 @@ test("renders a specific subcontractor's image", async () => {
   const subcontractorElement = await screen.findByTestId(`subcontractor-${subcontractor.id}`);
   expect(subcontractorElement).toBeInTheDocument();
 
-  const image = await within(subcontractorElement).findByAltText(`img-${subcontractor.id}`);
+  const image = await within(subcontractorElement).findByAltText('image');
   expect(image).toBeInTheDocument();
   expect(image).toHaveAttribute('src', subcontractor.imageUrl);
 });

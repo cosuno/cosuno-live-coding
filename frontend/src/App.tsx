@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       {subcontractors.map(({ id, name }) => (
-        <div key={id} className="Subcontractor">
+        <div key={id} className="Subcontractor" data-testid={`subcontractor-${id}`}>
           {name}
         </div>
       ))}
