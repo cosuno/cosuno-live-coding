@@ -15,7 +15,9 @@ app.get('/', async (_req, res) => {
     mode: sqlite3.OPEN_READONLY,
   });
 
-  const rows = await database.all('SELECT * FROM Subcontractors');
+  const rows = await database.all(
+    "SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%'",
+  );
 
   res.send(rows);
 });
